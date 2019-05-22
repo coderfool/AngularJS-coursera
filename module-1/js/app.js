@@ -3,11 +3,11 @@
     
     angular.module('LunchCheck', [])
 
-    .controller('LunchCheckController', lunchCheckController);
+    .controller('LunchCheckController', LunchCheckController);
 
-    lunchCheckController.$inject = ['$scope'];
+    LunchCheckController.$inject = ['$scope'];
 
-    function lunchCheckController($scope) {
+    function LunchCheckController($scope) {
         $scope.lunchItems = '';
         $scope.message = '';
 
