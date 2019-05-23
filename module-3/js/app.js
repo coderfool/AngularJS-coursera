@@ -16,8 +16,30 @@
     function NarrowItDownController(MenuSearchService) {
         var ctrl = this;
         ctrl.searchTerm = '';
-        ctrl.found = MenuSearchService.getMatchedMenuItems(ctrl.searchTerm.trim().toLowerCase());
+        ctrl.found = [];
+        ctrl.nothingFound = false;
 
+        ctrl.getMatchedItems = function() {
+            var searchTerm = ctrl.searchTerm.trim().toLowerCase();
+            ctrl.nothingFound = false;
+            ctrl.found = [];
+            
+            if (searchTerm == '') {
+                ctrl.nothingFound = true;
+                return;
+            }
+
+            var matchedItems = MenuSearchService.getMatchedMenuItems(searchTerm);
+
+            matchedItems.then(function(foundItems) {
+                if (foundItems.length == 0) {
+                    ctrl.nothingFound = true;
+                    return;
+                }
+                ctrl.found = foundItems;
+            });
+        };
+        
         ctrl.removeItem = function(index) {
             ctrl.found.splice(index, 1);
         }
@@ -33,23 +55,24 @@
             });
     
             return response.then(function(result) {
+                var allItems = result.data.menu_items;
                 var foundItems = [];
 
-                for (item in result) {
-                    if (item.description.indexOf(searchTerm) != -1) {
-                        foundItems.push(item);
+                for (var index in allItems) {
+                    if (allItems[index].description.indexOf(searchTerm) != -1) {
+                        foundItems.push(allItems[index]);
                     }
                 }
 
                 return foundItems;
-            });
+            })
         };
     }
 
     function FoundItems() {
         var ddo = {
             restrict: 'E',
-            templateUrl: '/templates/found-items.html',
+            templateUrl: './templates/found-items.html',
             scope: {
                 foundItems: '<',
                 removeItem: '&onRemove'
