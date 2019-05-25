@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="MenuApp">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Module 4 Assignment</title>
+    </head>
+
+    <body>
+        <h1>Welcome to our restaurant!</h1>
+        <ui-view></ui-view>
+        <div>
+            <spinner></spinner>
+        </div>
+
+        <script src="./lib/angular.min.js"></script>
+        <script src="./lib/angular-ui-router.min.js"></script>
+
+        <script src="./components/menuapp.module.js"></script>
+        <script src="./components/data.module.js"></script>
+
+        <script src="./components/routes.js"></script>
+
+        <script src="./components/categories.controller.js"></script>
+        <script src="./components/items.controller.js"></script>
+        <script src="./components/spinner.controller.js"></script>
+        <script src="./components/categories.component.js"></script>
+        <script src="./components/items.component.js"></script>
+        <script src="./components/spinner.component.js"></script>
+        <script src="./components/menudata.service.js"></script>
+    </body>
+</html>
