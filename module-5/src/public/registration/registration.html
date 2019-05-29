@@ -38,7 +38,7 @@
                 Item does not exist
             </span>
         </div>
-        <button class="btn btn-primary text-center" ng-disabled="!ctrl.favDishFound || ctrl.success" ng-click="ctrl.submit()">Sign Up</button>
+        <button class="btn btn-primary text-center" ng-disabled="registration.$invalid || !ctrl.favDishFound || ctrl.success" ng-click="ctrl.submit()">Sign Up</button>
     </form>
     <div class="alert alert-success alert-dismissible" ng-if="ctrl.success">
         <button class="close" data-dismiss="alert" aria-label="close">&times;</button>
