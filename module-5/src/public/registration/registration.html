@@ -1,0 +1,47 @@
+<h2 class="text-center">Sign Up</h2>
+<div id="registration-form" class="col-xs-12 col-sm-6 col-md-4">
+    <form name="registration" novalidate>
+        <div class="form-group">
+            <input type="text" class="form-control" name="firstName" placeholder="First Name" required ng-model="ctrl.user.firstName">
+            <span ng-if="registration.firstName.$touched && registration.firstName.$error.required" class="red">
+                This field is required
+            </span>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="lastName" placeholder="Last Name" required ng-model="ctrl.user.lastName">
+            <span ng-if="registration.lastName.$touched && registration.lastName.$error.required" class="red">
+                This field is required
+            </span>
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control" name="email" placeholder="Email" required 
+            ng-model="ctrl.user.email">
+            <span ng-if="registration.email.$touched && registration.email.$invalid" class="red">
+                Email must be in the format: handle@domain
+            </span>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="phone" pattern="(\d{3})-(\d{3})-(\d{4})" 
+            placeholder="Phone (###-###-####)" required ng-model="ctrl.user.phone">
+            <span ng-if="registration.phone.$touched && registration.phone.$invalid" class="red">
+                Phone must be in the format: ###-###-####
+            </span>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="favDish" 
+            placeholder="Favorite Dish (Menu Number)" required ng-model="ctrl.user.favDish.short_name" 
+            ng-blur="ctrl.getMenuItem(ctrl.user.favDish.short_name)" ng-keyup="ctrl.favDishFound = undefined">
+            <span ng-if="registration.favDish.$touched && registration.favDish.$error.required" class="red">
+                This field is required
+            </span>
+            <span ng-if="ctrl.favDishFound != undefined && !ctrl.favDishFound" class="red">
+                Item does not exist
+            </span>
+        </div>
+        <button class="btn btn-primary text-center" ng-disabled="!ctrl.favDishFound || ctrl.success" ng-click="ctrl.submit()">Sign Up</button>
+    </form>
+    <div class="alert alert-success alert-dismissible" ng-if="ctrl.success">
+        <button class="close" data-dismiss="alert" aria-label="close">&times;</button>
+        Your information has been saved
+    </div>
+</div>
