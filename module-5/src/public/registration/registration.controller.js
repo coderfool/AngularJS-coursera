@@ -19,7 +19,6 @@
                 if (response != null) {
                     ctrl.user.favDish = response;
                     ctrl.favDishFound = true;
-                    FavoriteDishService.setUser(ctrl.user);
                 } 
                 else {
                     ctrl.favDishFound = false;                    
@@ -29,6 +28,7 @@
 
         ctrl.submit = function() {
             ctrl.success = true;
+            FavoriteDishService.setUser(ctrl.user);
         }
     }
 })();
